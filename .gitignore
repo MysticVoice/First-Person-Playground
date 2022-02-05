@@ -1,0 +1,8 @@
+Library/
+Assembly-CSharp.csproj
+First Person Playground.sln
+Temp/
+Packages/
+obj/
+UserSettings/
+Logs/
