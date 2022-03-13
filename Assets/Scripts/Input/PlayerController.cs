@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float horizontalSpeed = 10f;
     [SerializeField]
-    private float clampAngle = 80f;
+    private float clampAngle = 60f;
     [SerializeField]
     private Transform lookDirection;
     [SerializeField]
@@ -24,44 +24,58 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int coyoteFrames = 5;
 
+    private bool skipFrame;
+
+    private IAmUseable weapon;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private InputManager inputManager;
-
 
     private Vector2 movement;
     private bool playerJumpedThisFrame;
     private Vector2 deltaInput;
     private int coyoteCounter = 5;
-    public InputActionReference jumpInput;
+
+    public ScriptableBoolEvent jumpInput;
+    public ScriptableBoolEvent fireInput;
+    public ScriptableVector2Event lookEvent;
+    public ScriptableVector2Event moveEvent;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        inputManager = InputManager.Instance;
         movement = Vector2.zero;
         deltaInput = Vector2.zero;
         playerJumpedThisFrame = false;
+        weapon = GetComponentInChildren<IAmUseable>();
+        jumpInput.OnTrigger += SetJumpState;
     }
 
-    private void Update()
+    private void SetJumpState(bool value)
+    {
+        if (!playerJumpedThisFrame) playerJumpedThisFrame = value;
+    }
+
+private void Update()
     {
         GatherInput();
+        Look(deltaInput);
     }
 
     private void GatherInput()
     {
-        movement = inputManager.GetPlayerMovement();
-        //if (!playerJumpedThisFrame) playerJumpedThisFrame = inputManager.PlayerJumpedThisFrame();
-        if (!playerJumpedThisFrame) playerJumpedThisFrame = jumpInput.action.ReadValue<bool>();
-        deltaInput = inputManager.GetMouseDelta();
+        deltaInput = lookEvent.value;
+        movement = moveEvent.value;
     }
 
     void FixedUpdate()
     {
-        Move(movement);
-        Look(deltaInput);
+        if (!skipFrame)
+        {
+            Move(movement);
+        }
+        else skipFrame = false;
+        weapon.Use(fireInput.value);
     }
 
     private void Move(Vector2 movement)
@@ -77,7 +91,6 @@ public class PlayerController : MonoBehaviour
             }
             else coyoteCounter = coyoteFrames;
         }
-
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = move.normalized;
         controller.Move(transform.TransformVector(move) * Time.fixedDeltaTime * playerSpeed);
@@ -87,8 +100,6 @@ public class PlayerController : MonoBehaviour
             coyoteCounter = 0;
         }
         if(coyoteCounter <= 0)playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-        
-        
         controller.Move(playerVelocity * Time.fixedDeltaTime);
         playerJumpedThisFrame = false;
     }
@@ -102,5 +113,11 @@ public class PlayerController : MonoBehaviour
         vertical += ((lookDirection.localRotation.eulerAngles.x+90)%360)-90;
         vertical = Mathf.Clamp(vertical,-clampAngle,clampAngle);
         lookDirection.localRotation = Quaternion.Euler(vertical, 0, 0);
+    }
+
+
+    public void SkipNextFrame()
+    {
+        skipFrame = true;
     }
 }

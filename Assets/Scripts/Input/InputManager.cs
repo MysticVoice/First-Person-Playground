@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private static InputManager _instance;
+    public ScriptableBoolEvent jumpEvent;
+    public ScriptableBoolEvent shootEvent;
+    public ScriptableVector2Event lookEvent;
+    public ScriptableVector2Event moveEvent;
 
+    private static InputManager _instance;
     public static InputManager Instance
     {
         get
@@ -15,7 +19,7 @@ public class InputManager : MonoBehaviour
     }
 
     private PlayerControlls playerControls;
-
+    
     private void Awake()
     {
         if (_instance != null && _instance != this) Destroy(this.gameObject);
@@ -23,8 +27,21 @@ public class InputManager : MonoBehaviour
         playerControls = new PlayerControlls();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
     }
+
+    private void Update()
+    {
+        UpdateInput();
+    }
+
+    private void UpdateInput()
+    {
+        if (playerControls.Player.Jump.triggered) jumpEvent.trigger(playerControls.Player.Jump.ReadValue<float>() > 0);
+        if (playerControls.Player.Shoot.triggered) shootEvent.trigger(playerControls.Player.Shoot.ReadValue<float>() > 0);
+        if (playerControls.Player.Look.triggered) lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
+        if (playerControls.Player.Movement.triggered) moveEvent.trigger(playerControls.Player.Movement.ReadValue<Vector2>());
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -33,20 +50,5 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-    }
-
-    public Vector2 GetPlayerMovement()
-    {
-        return playerControls.Player.Movement.ReadValue<Vector2>();
-    }
-
-    public Vector2 GetMouseDelta()
-    {
-        return playerControls.Player.Look.ReadValue<Vector2>();
-    }
-
-    public bool PlayerJumpedThisFrame()
-    {
-        return playerControls.Player.Jump.triggered;
     }
 }
