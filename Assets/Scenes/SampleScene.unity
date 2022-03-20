@@ -787,6 +787,7 @@ MonoBehaviour:
   lookDirection: {fileID: 1140395503}
   invertY: 1
   coyoteFrames: 5
+  extraJumps: 1
   jumpInput: {fileID: 11400000, guid: 4d2a773c962865547b663a527b49ed37, type: 2}
   fireInput: {fileID: 11400000, guid: dce9b445f53272445894654d1a60bdd7, type: 2}
   lookEvent: {fileID: 11400000, guid: 47f6b55a67876e440878a6065084ea04, type: 2}
