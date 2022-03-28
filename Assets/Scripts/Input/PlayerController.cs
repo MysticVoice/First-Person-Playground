@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
     public ScriptableBoolEvent fireInput;
     public ScriptableVector2Event lookEvent;
     public ScriptableVector2Event moveEvent;
+
+    [SerializeField]
+    public SerializeField airResistance;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -97,7 +101,9 @@ private void Update()
         
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = move.normalized;
-        controller.Move(transform.TransformVector(move) * Time.fixedDeltaTime * playerSpeed);
+        move = move * Time.fixedDeltaTime * playerSpeed;
+        playerVelocity += move;
+        //controller.Move(transform.TransformVector(playerVelocity));
     }
 
     private void GroundCheck()
@@ -105,17 +111,22 @@ private void Update()
         groundedPlayer = controller.isGrounded;
         if ((groundedPlayer && playerVelocity.y < 0) || coyoteCounter > 0)
         {
-            ResetJumps();
-            playerVelocity.y = 0f;
-            if (!groundedPlayer)
-            {
-                coyoteCounter--;
-                groundedPlayer = true;
-            }
-            else
-            {
-                coyoteCounter = coyoteFrames;
-            }
+            GroundPlayer();
+        }
+    }
+
+    private void GroundPlayer()
+    {
+        ResetJumps();
+        playerVelocity = Vector3.zero;
+        if (!groundedPlayer)
+        {
+            coyoteCounter--;
+            groundedPlayer = true;
+        }
+        else
+        {
+            coyoteCounter = coyoteFrames;
         }
     }
 
@@ -147,6 +158,11 @@ private void Update()
         vertical += ((lookDirection.localRotation.eulerAngles.x+90)%360)-90;
         vertical = Mathf.Clamp(vertical,-clampAngle,clampAngle);
         lookDirection.localRotation = Quaternion.Euler(vertical, 0, 0);
+    }
+
+    private void AirResistance()
+    {
+
     }
 
     private void ResetJumps()

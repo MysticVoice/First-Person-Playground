@@ -38,7 +38,8 @@ public class InputManager : MonoBehaviour
     {
         if (playerControls.Player.Jump.triggered) jumpEvent.trigger(playerControls.Player.Jump.ReadValue<float>() > 0);
         if (playerControls.Player.Shoot.triggered) shootEvent.trigger(playerControls.Player.Shoot.ReadValue<float>() > 0);
-        if (playerControls.Player.Look.triggered) lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
+        lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
+        //if (playerControls.Player.Look.triggered) lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
         if (playerControls.Player.Movement.triggered) moveEvent.trigger(playerControls.Player.Movement.ReadValue<Vector2>());
     }
 
