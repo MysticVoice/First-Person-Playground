@@ -11,8 +11,8 @@ public class RespawnPlayer : MonoBehaviour
             Transform spawnPoint = (FindObjectOfType(typeof(SpawnPoint)) as SpawnPoint).transform;
             other.transform.position = spawnPoint.position;
             other.transform.rotation = spawnPoint.rotation;
-            PlayerController pc= other.GetComponent<PlayerController>();
-            pc.SkipNextFrame();
+            ExpandedCharacterController cc = other.GetComponent<ExpandedCharacterController>();
+            cc.skipFrame = true;
         }
         
     }

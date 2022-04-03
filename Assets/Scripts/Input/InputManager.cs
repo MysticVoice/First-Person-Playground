@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public ScriptableBoolEvent jumpEvent;
-    public ScriptableBoolEvent shootEvent;
+    public ScriptableBoolEvent useEvent;
     public ScriptableVector2Event lookEvent;
     public ScriptableVector2Event moveEvent;
 
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
     private void UpdateInput()
     {
         if (playerControls.Player.Jump.triggered) jumpEvent.trigger(playerControls.Player.Jump.ReadValue<float>() > 0);
-        if (playerControls.Player.Shoot.triggered) shootEvent.trigger(playerControls.Player.Shoot.ReadValue<float>() > 0);
+        if (playerControls.Player.Shoot.triggered) useEvent.trigger(playerControls.Player.Shoot.ReadValue<float>() > 0);
         lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
         //if (playerControls.Player.Look.triggered) lookEvent.trigger(playerControls.Player.Look.ReadValue<Vector2>());
         if (playerControls.Player.Movement.triggered) moveEvent.trigger(playerControls.Player.Movement.ReadValue<Vector2>());
