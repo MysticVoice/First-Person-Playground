@@ -7,7 +7,6 @@ public class CoyoteState : BaseMovementState
     public override void EnterState(MovementStateMachine movement)
     {
         coyoteCounter = character.coyoteFrames;
-        character.movement.y = 0;
         character.SteppedOffLedge();
     }
 
@@ -17,6 +16,10 @@ public class CoyoteState : BaseMovementState
         if (character.IsGrounded()) movement.SwitchState(movement.groundedState);
         else if (coyoteCounter <= 0) movement.SwitchState(movement.fallingState);
         else if (character.playerJumpedThisFrame && character.CanJump()) movement.SwitchState(movement.jumpState);
-        else coyoteCounter--;
+        else
+        {
+            
+            coyoteCounter--;
+        }
     }
 }

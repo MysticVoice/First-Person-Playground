@@ -81,6 +81,23 @@ public class ExpandedCharacterController : MonoBehaviour
         return calculatedMovement;
     }
 
+    public void GroundedDownForce()
+    {
+        if (RaycastGrounded()) movement.y = -1;
+        else movement.y = 0;
+    }
+
+    public bool RaycastGrounded()
+    {
+        float floorDistanceFromFoot = 1;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.down * 0.9f, Vector3.down, out hit, floorDistanceFromFoot))
+        {
+            return true;
+        }
+        return false;
+    }
+
     private void Update()
     {
         Look(lookEvent.value);
@@ -90,6 +107,11 @@ public class ExpandedCharacterController : MonoBehaviour
     public void AddMovement(Vector3 movement) => this.movement = movement;
     public void SetMomentum(Vector3 momentum) => this.momentum = momentum;
     public void SetMovement(Vector3 movement) => this.movement = movement;
+
+    public void ResetVerticalMovement()
+    {
+        movement.y = 0;
+    }
 
     public bool IsGrounded()
     {
@@ -120,6 +142,7 @@ public class ExpandedCharacterController : MonoBehaviour
     public void SteppedOffLedge()
     {
         jumpsLeft--;
+        ResetVerticalMovement();
     }
 
     public void Fall()

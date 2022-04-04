@@ -24,7 +24,6 @@ public class MovementStateMachine : MonoBehaviour
 
     public void SwitchState(BaseMovementState state)
     {
-        //Debug.Log(state.GetType().Name);
         currentState = state;
         currentState.GetController(this);
         currentState.EnterState(this);

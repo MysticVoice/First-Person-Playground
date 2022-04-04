@@ -1184,7 +1184,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.8
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   clampAngle: 80
   lookDirection: {fileID: 1140395503}
   invertY: 1
-  coyoteFrames: 5
+  coyoteFrames: 2
   weight: 80
   area: 1
   dashFrames: 15
@@ -1690,10 +1690,7 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 2
-    m_SensorSize: {x: 1.994528, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
