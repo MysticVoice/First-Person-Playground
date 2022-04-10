@@ -56,6 +56,7 @@ public class ExpandedCharacterController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         jumpsLeft = 0;
+
     }
 
     private void FixedUpdate()

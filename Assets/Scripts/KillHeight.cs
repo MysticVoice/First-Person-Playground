@@ -11,6 +11,9 @@ public class KillHeight : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player.position.y < killHeight) player.position = transform.position;
+        if (player.position.y < killHeight)
+        {
+            GetComponent<RespawnPlayer>().Respawn(player);
+        }
     }
 }

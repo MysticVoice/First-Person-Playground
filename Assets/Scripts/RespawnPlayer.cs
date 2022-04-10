@@ -8,12 +8,17 @@ public class RespawnPlayer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Transform spawnPoint = (FindObjectOfType(typeof(SpawnPoint)) as SpawnPoint).transform;
-            other.transform.position = spawnPoint.position;
-            other.transform.rotation = spawnPoint.rotation;
-            ExpandedCharacterController cc = other.GetComponent<ExpandedCharacterController>();
-            cc.skipFrame = true;
+            Respawn(other.transform);
         }
         
+    }
+
+    public void Respawn(Transform player)
+    {
+        Transform spawnPoint = (FindObjectOfType(typeof(SpawnPoint)) as SpawnPoint).transform;
+        player.position = spawnPoint.position;
+        player.rotation = spawnPoint.rotation;
+        ExpandedCharacterController cc = player.GetComponent<ExpandedCharacterController>();
+        cc.skipFrame = true;
     }
 }
