@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponIdleState : WeaponBaseState
+namespace MysticVoice
 {
-    public override void EnterState(WeaponStateMachine weaponState)
+    public class WeaponIdleState : WeaponBaseState
     {
-        
-    }
+        public override void EnterState(WeaponStateMachine weaponState)
+        {
 
-    public override void UpdateState(WeaponStateMachine stateMachine)
-    {
-        if (held.use) stateMachine.SwitchState(stateMachine.fireState);
+        }
+
+        public override void UpdateState(WeaponStateMachine stateMachine)
+        {
+            if (weapon.inputs.GetBinaryButton(0)) stateMachine.SwitchState(stateMachine.fireState);
+            if (weapon.inputs.GetBinaryButton(1)) stateMachine.SwitchState(stateMachine.reloadState);
+        }
     }
 }

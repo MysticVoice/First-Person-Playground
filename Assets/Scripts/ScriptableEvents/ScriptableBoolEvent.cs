@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Scriptable Bool Event",menuName = "Scriptable Objects/Events/Scriptable Bool Event")]
-public class ScriptableBoolEvent : ScriptableObject
+namespace MysticVoice
 {
-    public event System.Action<bool> OnTrigger;
-    public bool value = false;
-    
-    public void trigger(bool value)
+    [CreateAssetMenu(fileName = "Scriptable Bool Event", menuName = "Scriptable Objects/Events/Scriptable Bool Event")]
+    public class ScriptableBoolEvent : ScriptableObject
     {
-        OnTrigger?.Invoke(value);
-        this.value = value;
+        public event System.Action<bool> OnTrigger;
+        public bool value = false;
+
+        public void trigger(bool value)
+        {
+            OnTrigger?.Invoke(value);
+            this.value = value;
+        }
     }
 }

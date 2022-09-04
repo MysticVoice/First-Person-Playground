@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class CoyoteState : BaseMovementState
+namespace MysticVoice
 {
-    public int coyoteCounter;
-
-    public override void EnterState(MovementStateMachine movement)
+    public class CoyoteState : BaseMovementState
     {
-        coyoteCounter = character.coyoteFrames;
-        character.SteppedOffLedge();
-    }
+        public int coyoteCounter;
 
-    public override void UpdateState(MovementStateMachine movement)
-    {
-        character.StandardMovement();
-        if (character.IsGrounded()) movement.SwitchState(movement.groundedState);
-        else if (coyoteCounter <= 0) movement.SwitchState(movement.fallingState);
-        else if (character.playerJumpedThisFrame && character.CanJump()) movement.SwitchState(movement.jumpState);
-        else
+        public override void EnterState(MovementStateMachine movement)
         {
-            
-            coyoteCounter--;
+            coyoteCounter = character.coyoteFrames;
+            character.SteppedOffLedge();
+        }
+
+        public override void UpdateState(MovementStateMachine movement)
+        {
+            character.StandardMovement();
+            if (character.IsGrounded()) movement.SwitchState(movement.groundedState);
+            else if (coyoteCounter <= 0) movement.SwitchState(movement.fallingState);
+            else if (character.playerJumpedThisFrame && character.CanJump()) movement.SwitchState(movement.jumpState);
+            else
+            {
+
+                coyoteCounter--;
+            }
         }
     }
 }

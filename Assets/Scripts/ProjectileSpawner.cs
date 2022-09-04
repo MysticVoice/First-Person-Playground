@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSpawner
+namespace MysticVoice
 {
-    public static void SpawnProjectile(FirePoint firePoint,GameObject projectile)
+    public class ProjectileSpawner
     {
-        GameObject proj = MonoBehaviour.Instantiate(projectile);
-        proj.transform.position = firePoint.transform.position;
-        proj.transform.rotation = firePoint.transform.rotation;
+        public static void SpawnProjectile(FirePoint firePoint, GameObject projectile)
+        {
+            GameObject proj = MonoBehaviour.Instantiate(projectile);
+            proj.transform.position = firePoint.transform.position;
+            proj.transform.rotation = firePoint.transform.rotation;
+        }
     }
 }

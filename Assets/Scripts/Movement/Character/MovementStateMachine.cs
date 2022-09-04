@@ -2,30 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementStateMachine : MonoBehaviour
+namespace MysticVoice
 {
-    BaseMovementState currentState;
-    
-    public GroundedState groundedState = new GroundedState();
-    public JumpState jumpState = new JumpState();
-    public FallingState fallingState = new FallingState();
-    public CoyoteState coyoteState = new CoyoteState();
-    public DashState dashState = new DashState();
-
-    void Start()
+    public class MovementStateMachine : MonoBehaviour
     {
-        SwitchState(groundedState);
-    }
+        BaseMovementState currentState;
 
-    void FixedUpdate()
-    {
-        currentState.UpdateState(this);
-    }
+        public GroundedState groundedState = new GroundedState();
+        public JumpState jumpState = new JumpState();
+        public FallingState fallingState = new FallingState();
+        public CoyoteState coyoteState = new CoyoteState();
+        public DashState dashState = new DashState();
 
-    public void SwitchState(BaseMovementState state)
-    {
-        currentState = state;
-        currentState.GetController(this);
-        currentState.EnterState(this);
+        void Start()
+        {
+            SwitchState(groundedState);
+        }
+
+        void FixedUpdate()
+        {
+            currentState.UpdateState(this);
+        }
+
+        public void SwitchState(BaseMovementState state)
+        {
+            currentState = state;
+            currentState.GetController(this);
+            currentState.EnterState(this);
+        }
     }
 }

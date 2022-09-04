@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponFireState : WeaponBaseState
+namespace MysticVoice
 {
-    public override void EnterState(WeaponStateMachine weaponState)
+    public class WeaponFireState : WeaponBaseState
     {
-        if (!weapon.MagHasBullets()) weaponState.SwitchState(weaponState.reloadState);
-    }
+        public override void EnterState(WeaponStateMachine weaponState)
+        {
+            if (!weapon.MagHasBullets()) weaponState.SwitchState(weaponState.reloadState);
+            else weaponState.FireEvent?.Invoke();
+        }
 
-    public override void UpdateState(WeaponStateMachine weaponState)
-    {
-        weapon.Fire(true);
-        weaponState.SwitchState(weaponState.cooldownState);
+        public override void UpdateState(WeaponStateMachine weaponState)
+        {
+            weapon.Fire(true);
+            weaponState.SwitchState(weaponState.cooldownState);
+        }
     }
 }

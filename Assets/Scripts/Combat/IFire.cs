@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IFire
+namespace MysticVoice
 {
-    public void Fire(bool fireInput);
+    public interface IFire
+    {
+        public void Fire(bool fireInput);
+    }
 }

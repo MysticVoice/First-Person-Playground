@@ -1,12 +1,13 @@
-public abstract class WeaponBaseState
+namespace MysticVoice
 {
-    public HeldItemInputs held;
-    public Weapon weapon;
-    public abstract void EnterState(WeaponStateMachine stateMachine);
-    public abstract void UpdateState(WeaponStateMachine stateMachine);
-    public void GetController(WeaponStateMachine stateMachine)
+    public abstract class WeaponBaseState
     {
-        held = stateMachine.GetComponentInParent<HeldItemInputs>();
-        weapon = stateMachine.GetComponent<Weapon>();
+        public Weapon weapon;
+        public abstract void EnterState(WeaponStateMachine stateMachine);
+        public abstract void UpdateState(WeaponStateMachine stateMachine);
+        public void GetController(WeaponStateMachine stateMachine)
+        {
+            weapon = stateMachine.GetComponent<Weapon>();
+        }
     }
 }

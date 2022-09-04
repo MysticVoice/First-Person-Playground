@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+namespace MysticVoice
 {
-    public float speed;
-    public int framesUntilDeath = 120;
-    // Update is called once per frame
-    void FixedUpdate()
+    public class Projectile : MonoBehaviour
     {
-        if (framesUntilDeath <= 0) Destroy(this.gameObject);
-        transform.position+=transform.forward*speed;
-        framesUntilDeath--;
+        public float speed;
+        public int framesUntilDeath = 120;
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            if (framesUntilDeath <= 0) Destroy(this.gameObject);
+            transform.position += transform.forward * speed;
+            framesUntilDeath--;
+        }
     }
 }

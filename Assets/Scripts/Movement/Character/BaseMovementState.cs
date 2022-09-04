@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public abstract class BaseMovementState
+namespace MysticVoice
 {
-    public ExpandedCharacterController character;
-    public abstract void EnterState(MovementStateMachine movement);
-    public abstract void UpdateState(MovementStateMachine movement);
-    public void GetController(MovementStateMachine movement)
+    public abstract class BaseMovementState
     {
-        character = movement.GetComponent<ExpandedCharacterController>();
+        public ExpandedCharacterController character;
+        public abstract void EnterState(MovementStateMachine movement);
+        public abstract void UpdateState(MovementStateMachine movement);
+        public void GetController(MovementStateMachine movement)
+        {
+            character = movement.GetComponent<ExpandedCharacterController>();
+        }
     }
 }

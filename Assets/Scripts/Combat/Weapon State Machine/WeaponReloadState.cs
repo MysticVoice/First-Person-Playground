@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponReloadState : WeaponBaseState
+namespace MysticVoice
 {
-    float reloadTimer;
-    public override void EnterState(WeaponStateMachine weaponState)
+    public class WeaponReloadState : WeaponBaseState
     {
-        reloadTimer = weapon.GetNextReloadTime(weapon.reloadTime);
-    }
-
-    public override void UpdateState(WeaponStateMachine weaponState)
-    {
-        if (CheckReloadTimer())
+        float reloadTimer;
+        public override void EnterState(WeaponStateMachine weaponState)
         {
-            weapon.FillMagazine();
-            weaponState.SwitchState(weaponState.idleState);
+            reloadTimer = weapon.GetNextReloadTime(weapon.reloadTime);
+            weaponState.reloadEvent?.Invoke();
         }
-    }
 
-    public bool CheckReloadTimer()
-    {
-        return Time.time >= reloadTimer;
+        public override void UpdateState(WeaponStateMachine weaponState)
+        {
+            if (CheckReloadTimer())
+            {
+                weapon.FillMagazine();
+                weaponState.SwitchState(weaponState.idleState);
+            }
+        }
+
+        public bool CheckReloadTimer()
+        {
+            return Time.time >= reloadTimer;
+        }
     }
 }

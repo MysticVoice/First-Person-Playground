@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponCooldownState : WeaponBaseState
+namespace MysticVoice
 {
-    private float cooldownTimer;
-    public override void EnterState(WeaponStateMachine weaponState)
+    public class WeaponCooldownState : WeaponBaseState
     {
-        cooldownTimer = weapon.GetNextFireTime(weapon.fireRate);
-    }
+        private float cooldownTimer;
+        public override void EnterState(WeaponStateMachine weaponState)
+        {
+            cooldownTimer = weapon.GetNextFireTime(weapon.fireRate);
+        }
 
-    public override void UpdateState(WeaponStateMachine weaponState)
-    {
-        if (CheckCooldownTimer()) weaponState.SwitchState(weaponState.idleState);
-    }
+        public override void UpdateState(WeaponStateMachine weaponState)
+        {
+            if (CheckCooldownTimer()) weaponState.SwitchState(weaponState.idleState);
+        }
 
-    public bool CheckCooldownTimer()
-    {
-        return Time.time >= cooldownTimer;
+        public bool CheckCooldownTimer()
+        {
+            return Time.time >= cooldownTimer;
+        }
     }
 }

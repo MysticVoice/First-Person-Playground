@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-public class AmmoTextWriter : MonoBehaviour
+namespace MysticVoice
 {
-    Weapon w;
-    public TMP_Text text;
-
-    private void OnEnable()
+    public class AmmoTextWriter : MonoBehaviour
     {
-        w = GetComponentInChildren<Weapon>();
-        w.OnAmmoChanged += UpdateText;
-    }
+        Weapon w;
+        public TMP_Text text;
 
-    private void OnDisable()
-    {
-        w.OnAmmoChanged -= UpdateText;
-    }
+        private void OnEnable()
+        {
+            w = GetComponentInChildren<Weapon>();
+            w.OnAmmoChanged += UpdateText;
+        }
 
-    public void UpdateText(string text)
-    {
-        this.text.text = text;
+        private void OnDisable()
+        {
+            w.OnAmmoChanged -= UpdateText;
+        }
+
+        public void UpdateText(string text)
+        {
+            this.text.text = text;
+        }
     }
 }
