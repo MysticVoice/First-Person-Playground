@@ -1,14 +1,19 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.UI.Image;
+using UnityEngine.InputSystem.HID;
 
 namespace MysticVoice
 {
-    public class Weapon : MonoBehaviour, IFire, IDataPersistence
+    public enum FireMode { projectile, hitscan}
+    public class Weapon : MonoBehaviour, IFire, IDataPersistence, IHeldItem
     {
         public bool automatic = true;
         public int magazineSize = 30;
         public float fireRate = 1;
         public bool useProjectiles = true;
+        public FireMode fireMode = FireMode.projectile;
         public event System.Action<string> OnAmmoChanged;
 
         private int bulletsInMag;
@@ -21,7 +26,10 @@ namespace MysticVoice
         public Transform gunModel;
         public Transform gunModelDefaultPos;
 
-        public IReturnButtonPresses inputs;
+        public UnityAction<RaycastHit> hitEvent;
+
+        public bool fireInput { get; set; }
+        public bool reloadInput { get; set; }
 
         private void Start()
         {
@@ -31,14 +39,18 @@ namespace MysticVoice
 
         public void Fire(bool input)
         {
-            if (useProjectiles) ProjectileSpawner.SpawnProjectile(firePoint, projectile);
+            if (fireMode == FireMode.projectile) ProjectileSpawner.SpawnProjectile(Camera.main.transform, projectile, Camera.main.transform.forward * 1f);
+            else if (fireMode == FireMode.hitscan)
+            {
+                RaycastHit hit;
+                Hitscan.Fire(Camera.main.transform,out hit);
+                hitEvent?.Invoke(hit);
+            }
             UseBullet();
         }
-
         public void OnEnable()
         {
             firePoint = GetComponentInChildren<FirePoint>();
-            inputs = GetComponentInParent<IReturnButtonPresses>();
         }
 
         public float TimeToFire(float fireRate) => 1 / fireRate;
@@ -74,6 +86,27 @@ namespace MysticVoice
         public void SaveData(ref GameData data)
         {
             data.ammo = this.bulletsInMag;
+        }
+
+        public void PrimaryUse()
+        {
+            fireInput = true;
+        }
+
+        public void SecondaryUse()
+        {
+            
+        }
+
+        public void Reload()
+        {
+            reloadInput = true;
+        }
+
+        public void ResetInputs()
+        {
+            reloadInput = false;
+            fireInput = false;
         }
     }
 }

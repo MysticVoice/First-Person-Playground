@@ -10,10 +10,12 @@ namespace MysticVoice
         public override void EnterState(WeaponStateMachine weaponState)
         {
             cooldownTimer = weapon.GetNextFireTime(weapon.fireRate);
+            
         }
 
         public override void UpdateState(WeaponStateMachine weaponState)
         {
+            weapon.ResetInputs();
             if (CheckCooldownTimer()) weaponState.SwitchState(weaponState.idleState);
         }
 

@@ -25,10 +25,6 @@ namespace MysticVoice
         public bool invertY;
         [SerializeField]
         public int coyoteFrames = 5;
-        [Range(40, 100)]
-        public float weight = 80;
-        [Range(0, 2)]
-        public float area = 1;
 
         public int dashFrames = 15;
         public float dashMultiplier = 5;
@@ -36,13 +32,12 @@ namespace MysticVoice
         private CharacterController controller;
         public Vector3 momentum = Vector3.zero;
         public Vector3 movement = Vector3.zero;
+        private Vector2 moveInput = Vector2.zero;
         private Vector2 look = Vector2.zero;
 
         //public ScriptableBoolEvent jumpInput;
         //public ScriptableVector2Event lookEvent;
         //public ScriptableVector2Event moveEvent;
-
-        private IReturnButtonPresses inputs;
 
         public int extraJumps = 1;
         private int jumpsLeft;
@@ -52,7 +47,6 @@ namespace MysticVoice
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            inputs = GetComponent<IReturnButtonPresses>();
             jumpsLeft = 0;
 
         }
@@ -74,10 +68,8 @@ namespace MysticVoice
 
         public void StandardMovement()
         {
-            //movement.x = moveEvent.value.normalized.x;
-            //movement.z = moveEvent.value.normalized.y;
-            movement.x = inputs.GetVector2Button(0).x;
-            movement.z = inputs.GetVector2Button(0).y;
+            movement.x = moveInput.normalized.x;
+            movement.z = moveInput.normalized.y;
         }
 
         private Vector3 CalculateMovement()
@@ -106,15 +98,12 @@ namespace MysticVoice
 
         private void Update()
         {
-            GetInputs();
-            //Look(lookEvent.value);
             Look(look);
         }
 
-        private void GetInputs()
+        public void SetMoveInput(Vector2 moveInput)
         {
-            UpdateJumpInput();
-            UpdateLookInput();
+            this.moveInput = moveInput;
         }
 
         public void AddMomentum(Vector3 momentum) => this.momentum = momentum;
@@ -137,16 +126,13 @@ namespace MysticVoice
             jumpsLeft = extraJumps + 1;
         }
 
-        public void UpdateJumpInput(/*bool value*/)
+        public void SetJumpInput(bool jumpInput)
         {
-            //if (!playerJumpedThisFrame) playerJumpedThisFrame = value;
-            if (!playerJumpedThisFrame) playerJumpedThisFrame = inputs.GetBinaryButton(2);
+            if (!playerJumpedThisFrame) playerJumpedThisFrame = jumpInput;
         }
-        public void UpdateLookInput()
+        public void SetLookInput(Vector2 lookInput)
         {
-            look = inputs.GetVector2Button(1);
-            //movement.x = inputs.GetVector2Button(0).x;
-            //movement.z = inputs.GetVector2Button(0).y;
+            look = lookInput;
         }
 
         public bool CanJump()

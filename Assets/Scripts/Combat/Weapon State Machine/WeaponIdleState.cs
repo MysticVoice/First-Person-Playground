@@ -13,8 +13,8 @@ namespace MysticVoice
 
         public override void UpdateState(WeaponStateMachine stateMachine)
         {
-            if (weapon.inputs.GetBinaryButton(0)) stateMachine.SwitchState(stateMachine.fireState);
-            if (weapon.inputs.GetBinaryButton(1)) stateMachine.SwitchState(stateMachine.reloadState);
+            if (weapon.fireInput) stateMachine.SwitchState(stateMachine.fireState);
+            if (weapon.reloadInput) stateMachine.SwitchState(stateMachine.reloadState);
         }
     }
 }

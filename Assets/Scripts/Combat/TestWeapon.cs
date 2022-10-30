@@ -16,7 +16,7 @@ namespace MysticVoice
 
         public void Fire(bool fireInput)
         {
-            ProjectileSpawner.SpawnProjectile(firePoint, projectile);
+            ProjectileSpawner.SpawnProjectile(firePoint.transform, projectile);
         }
     }
 }

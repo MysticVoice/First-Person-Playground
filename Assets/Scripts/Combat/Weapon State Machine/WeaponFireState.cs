@@ -10,10 +10,12 @@ namespace MysticVoice
         {
             if (!weapon.MagHasBullets()) weaponState.SwitchState(weaponState.reloadState);
             else weaponState.FireEvent?.Invoke();
+            
         }
 
         public override void UpdateState(WeaponStateMachine weaponState)
         {
+            weapon.ResetInputs();
             weapon.Fire(true);
             weaponState.SwitchState(weaponState.cooldownState);
         }

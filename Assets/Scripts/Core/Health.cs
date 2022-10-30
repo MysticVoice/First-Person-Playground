@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace MysticVoice
@@ -24,6 +27,11 @@ namespace MysticVoice
             {
                 HealthReachedZeroEvent?.Invoke();
             }
+        }
+        public static float operator +(Health health,float value)
+        {
+            health.health += value;
+            return health.health;
         }
     }
 }

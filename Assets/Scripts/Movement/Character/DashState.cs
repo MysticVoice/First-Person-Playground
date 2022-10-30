@@ -9,8 +9,8 @@ namespace MysticVoice
         private int dashCounter;
         public override void EnterState(MovementStateMachine movement)
         {
-            character.momentum = Vector3.zero;
-            character.momentum = Vector3.zero;
+            character.SetMovement(Vector3.zero);
+            character.SetMomentum(Vector3.zero);
             dashCounter = character.dashFrames;
         }
 
@@ -20,7 +20,7 @@ namespace MysticVoice
             else
             {
                 dashCounter--;
-                character.movement = character.lookDirection.TransformVector(Vector3.forward * character.playerSpeed * character.dashMultiplier * Time.fixedDeltaTime);
+                character.SetMovement(character.lookDirection.TransformVector(Vector3.forward * character.playerSpeed * character.dashMultiplier * Time.fixedDeltaTime));
             }
         }
     }

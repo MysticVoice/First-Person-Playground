@@ -6,11 +6,15 @@ namespace MysticVoice
 {
     public class ProjectileSpawner
     {
-        public static void SpawnProjectile(FirePoint firePoint, GameObject projectile)
+        public static void SpawnProjectile(Transform t, GameObject projectile)
+        {
+            SpawnProjectile(t,projectile,Vector3.zero);
+        }
+        public static void SpawnProjectile(Transform t, GameObject projectile, Vector3 offset)
         {
             GameObject proj = MonoBehaviour.Instantiate(projectile);
-            proj.transform.position = firePoint.transform.position;
-            proj.transform.rotation = firePoint.transform.rotation;
+            proj.transform.position = t.position + offset;
+            proj.transform.rotation = t.rotation;
         }
     }
 }

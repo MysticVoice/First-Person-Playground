@@ -11,10 +11,12 @@ namespace MysticVoice
         {
             reloadTimer = weapon.GetNextReloadTime(weapon.reloadTime);
             weaponState.reloadEvent?.Invoke();
+            
         }
 
         public override void UpdateState(WeaponStateMachine weaponState)
         {
+            weapon.ResetInputs();
             if (CheckReloadTimer())
             {
                 weapon.FillMagazine();
