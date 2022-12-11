@@ -14,7 +14,7 @@ namespace MysticVoice
         public void Spawn()
         {
             GameObject temp = Instantiate(prefab);
-            temp.transform.position = this.transform.position + new Vector3(Random.RandomRange(-range, range), 0, Random.RandomRange(-range,range));
+            temp.transform.position = this.transform.position + new Vector3(Random.Range(-range, range), 0, Random.Range(-range,range));
             ResetTimer();
         }
 
