@@ -18,7 +18,6 @@ namespace MysticVoice
         private void spawnObject(FirePoint fp)
         {
             Instantiate(spawnable,fp.transform);
-            
         }
     }
 

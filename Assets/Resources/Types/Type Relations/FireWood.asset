@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5cad63332fc6e245809e26cd0d17b6a, type: 3}
-  m_Name: Fireball
+  m_Script: {fileID: 11500000, guid: e00fc092340a6c543b67c9b8e39ad286, type: 3}
+  m_Name: FireWood
   m_EditorClassIdentifier: 
-  spawnable: {fileID: 0}
+  multiplier: 1.5
+  AttackingType: {fileID: 11400000, guid: 41ec7616a226f884c89cef771c850c1d, type: 2}
+  DefendingType: {fileID: 11400000, guid: 3b6c0ad50a9e79a4f8fffeab61bb5996, type: 2}

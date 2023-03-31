@@ -7,13 +7,12 @@ namespace MysticVoice
     public class Projectile : MonoBehaviour
     {
         public float speed;
-        public int framesUntilDeath = 120;
-        // Update is called once per frame
-        void FixedUpdate()
+        public int projectileLifetime = 3;
+
+        public void Awake()
         {
-            if (framesUntilDeath <= 0) Destroy(this.gameObject);
-            transform.position += transform.forward * speed;
-            framesUntilDeath--;
+            Destroy(gameObject,projectileLifetime);
+            GetComponent<Rigidbody>().velocity = transform.forward * speed;
         }
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace MysticVoice
 {
-    public class Inventory : ScriptableObject
+    public class ValueType : ScriptableObject
     {
-        public List<Item> items;
+        public Color color;
+        public Sprite sprite;
     }
 }

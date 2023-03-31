@@ -9,7 +9,7 @@ namespace MysticVoice
 
 
 
-    public class CreateHeroWindow : EditorWindow
+    public class AbilityCreatorWindow : EditorWindow
     {
         private SerializedObject serializedObject;
         private SerializedProperty serializedProperty;
@@ -30,7 +30,7 @@ namespace MysticVoice
             {
                 abilities = ScriptableObjectGeter.GetAllInstances<Ability>();
                 newAbility.name = "Ability" + (abilities.Length + 1);
-                AssetDatabase.CreateAsset(newAbility, "Assets/Scripts/hero" + (abilities.Length + 1) + ".asset");
+                AssetDatabase.CreateAsset(newAbility, "Assets/Scripts/Abilities/ScriptableObjects/" + newAbility.name + ".asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 Close();

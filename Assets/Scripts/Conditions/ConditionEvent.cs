@@ -13,7 +13,14 @@ namespace MysticVoice
 
         public bool CheckCondition()
         {
-            bool success = condition.CheckCondition();
+            bool success = condition.CheckCondition(transform);
+            if (success) ConditionSuccess?.Invoke();
+            else ConditionFail?.Invoke();
+            return success;
+        }
+        public bool CheckCondition(Transform transform)
+        {
+            bool success = condition.CheckCondition(transform);
             if (success) ConditionSuccess?.Invoke();
             else ConditionFail?.Invoke();
             return success;

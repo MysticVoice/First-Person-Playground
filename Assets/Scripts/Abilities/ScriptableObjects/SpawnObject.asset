@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5cad63332fc6e245809e26cd0d17b6a, type: 3}
-  m_Name: TestObject
+  m_Name: SpawnObject
   m_EditorClassIdentifier: 
   spawnable: {fileID: 5402763896303626053, guid: 5b08d6865f1ee1f4a9f21de1f62aa8f1, type: 3}

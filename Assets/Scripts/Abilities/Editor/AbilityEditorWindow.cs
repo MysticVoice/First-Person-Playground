@@ -67,6 +67,12 @@ namespace MysticVoice
             {
                 selectedProperty = selectedPropertyTemp;
             }
+            if(GUILayout.Button("New Ability"))
+            {
+                Ability newAbility = ScriptableObject.CreateInstance<SpawnObject>();
+                AbilityCreatorWindow newAbilityCreator = GetWindow<AbilityCreatorWindow>("New Ability");
+                newAbilityCreator.newAbility = newAbility;
+            }
         }
 
         protected void Apply()

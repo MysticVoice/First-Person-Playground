@@ -7,5 +7,6 @@ namespace MysticVoice
     public interface IHaveACondition
     {
         public bool CheckCondition();
+        public bool CheckCondition(Transform caller);
     }
 }

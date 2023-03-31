@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 5402763896303626051}
   - component: {fileID: 5402763896303626050}
   - component: {fileID: 5402763896303626061}
-  - component: {fileID: 5402763896303626060}
+  - component: {fileID: 8826829510074645388}
+  - component: {fileID: -7815562977728731239}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -96,8 +97,17 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5402763896303626053}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -149,12 +159,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c8e8fa011677142ad6361bf0e89f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  health_type: {fileID: 11400000, guid: 81bd7a5bb8e5c16419e1ca7b84b99f4a, type: 2}
+  maxHealth: 100
   HealthReachedZeroEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5402763896303626060}
-        m_TargetAssemblyTypeName: Death, Assembly-CSharp
+      - m_Target: {fileID: 8826829510074645388}
+        m_TargetAssemblyTypeName: MysticVoice.DropItemsFromLootTable, Assembly-CSharp
+        m_MethodName: DropItems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -7815562977728731239}
+        m_TargetAssemblyTypeName: MysticVoice.Death, Assembly-CSharp
         m_MethodName: Die
         m_Mode: 1
         m_Arguments:
@@ -165,7 +188,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5402763896303626060
+--- !u!114 &8826829510074645388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402763896303626053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ffc605cd3d4224584ec0896178e1d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 4555799865440695957, guid: cf9c4a3be0735fd4ca9ea8048d8c813a, type: 3}
+  loot: {fileID: 11400000, guid: b606b2d5a25c4f743aa1018d2ecfef60, type: 2}
+  lootRolls: 1
+--- !u!114 &-7815562977728731239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

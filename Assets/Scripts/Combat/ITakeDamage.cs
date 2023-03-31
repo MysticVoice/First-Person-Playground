@@ -7,5 +7,6 @@ namespace MysticVoice
     public interface ITakeDamage
     {
         public void Damage(float damage);
+        public void Damage(float damage,DamageType damageType);
     }
 }

@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace MysticVoice
 {
     public class Health : MonoBehaviour, ITakeDamage
     {
+        [SerializeField]
+        private HealthType health_type;
         public float maxHealth = 100;
         private float health;
 
@@ -22,6 +25,16 @@ namespace MysticVoice
 
         public void Damage(float damage)
         {
+            health -= damage;
+            if (health <= 0)
+            {
+                HealthReachedZeroEvent?.Invoke();
+            }
+        }
+
+        public void Damage(float damage, DamageType damageType)
+        {
+            damage *= damageType.GetModifier(health_type);
             health -= damage;
             if (health <= 0)
             {

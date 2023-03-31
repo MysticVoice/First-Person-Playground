@@ -12,9 +12,7 @@ namespace MysticVoice
         }
         public static void SpawnProjectile(Transform t, GameObject projectile, Vector3 offset)
         {
-            GameObject proj = MonoBehaviour.Instantiate(projectile);
-            proj.transform.position = t.position + offset;
-            proj.transform.rotation = t.rotation;
+            GameObject proj = MonoBehaviour.Instantiate(projectile,t.position+offset,t.rotation);
         }
     }
 }
