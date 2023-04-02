@@ -8,6 +8,7 @@ namespace MysticVoice.Core
     public class BaseInteractible : MonoBehaviour, IInteractible
     {
         public string text;
+        public bool dissabledByDefault;
 
         public virtual string GetInteractionText()
         {
@@ -28,6 +29,26 @@ namespace MysticVoice.Core
         public virtual bool IsEnabled()
         {
             return enabled;
+        }
+        private void OnEnable()
+        {
+            if (!dissabledByDefault) AddToInteractionSystem();
+        }
+
+        private void OnDisable()
+        {
+            RemoveFromInteractionSystem();
+        }
+
+        public void AddToInteractionSystem()
+        {
+            InteractionSystem.instance.AddInteractible(this as IInteractible);
+        }
+
+        protected void RemoveFromInteractionSystem()
+        {
+            InteractionSystem interactionSystem = InteractionSystem.instance;
+            interactionSystem.RemoveInteractible(this);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace MysticVoice
     public class GameData
     {
         public int ammo;
+        public Inventory inventory;
         public GameData()
         {
             ammo = 30;

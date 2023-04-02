@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace MysticVoice
 {
-    public class InventoryHolder : MonoBehaviour
+    public class InventoryHolder : MonoBehaviour, IDataPersistence
     {
         [SerializeField]
         private Inventory inventory;
 
         private void Start()
         {
-            InitializeInventory();
+            //InitializeInventory();
         }
 
         public Inventory GetInventory()
@@ -27,6 +27,16 @@ namespace MysticVoice
         private void InitializeInventory()
         {
              GetInventory();
+        }
+
+        public void LoadData(GameData data)
+        {
+            inventory = data.inventory;
+        }
+
+        public void SaveData(ref GameData data)
+        {
+            data.inventory = GetInventory();
         }
     }
 }

@@ -1,5 +1,8 @@
+using System;
+
 namespace MysticVoice
 {
+    [Serializable]
     public class InventoryItem
     {
         public Item item;

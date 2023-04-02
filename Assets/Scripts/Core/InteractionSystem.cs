@@ -12,13 +12,22 @@ namespace MysticVoice.Core
     {
         public InputActionReference interactionInput;
         public float interactionRange = 3;
+        public static GameObject Player => GameObject.FindGameObjectWithTag("Player");
         private Transform player;
         public Transform world;
         private IInteractible currentInteractible;
         public TMP_Text interactionText;
 
         //WARNING Only IInteractibles in this list or it breaks
-        public List<MonoBehaviour> interactibles;
+        private List<MonoBehaviour> interactibles;
+        public List<MonoBehaviour> Interactibles
+        {
+            get
+            {
+                if (interactibles == null) interactibles = new List<MonoBehaviour>();
+                return interactibles;
+            }
+        }
 
         private bool interactNextFrame;
         public static InteractionSystem instance { get; private set; }
@@ -31,16 +40,26 @@ namespace MysticVoice.Core
             else
             {
                 instance = this;
-                SetupInteractibles();
-                interactionInput.action.Enable();
+                //SetupInteractibles();
                 player = GameObject.FindGameObjectWithTag("Player").transform;
             }
         }
 
-        public void SetupInteractibles()
+
+
+        private void OnEnable()
         {
-            interactibles = world.GetComponentsInChildren<IInteractible>().ToList().Cast<MonoBehaviour>().ToList();
-            interactNextFrame = false;
+            interactionInput.action.Enable();
+        }
+
+        private void OnDisable()
+        {
+            interactionInput.action.Disable();
+        }
+
+        public void RemoveInteractible(BaseInteractible interactible)
+        {
+            Interactibles.Remove(interactible);
         }
 
         public bool GetInteractionInput()
@@ -58,7 +77,7 @@ namespace MysticVoice.Core
         {
             MonoBehaviour result = null;
             float shortestDistance = 10000000;
-            foreach (MonoBehaviour interactible in interactibles)
+            foreach (MonoBehaviour interactible in Interactibles)
             {
                 float distance = DistanceFromPlayer(interactible);
                 if (distance <= interactionRange && distance < shortestDistance)
@@ -92,7 +111,7 @@ namespace MysticVoice.Core
 
         public void AddInteractible(MonoBehaviour interactible)
         {
-            interactibles.Add(interactible);
+            Interactibles.Add(interactible);
         }
 
         private void Update()
