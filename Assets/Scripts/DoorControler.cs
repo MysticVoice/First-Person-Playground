@@ -15,13 +15,15 @@ namespace MysticVoice
         public float animationLength = 3;
 
         private bool animationRunning;
+        [SerializeField,HideInInspector]
         private bool animationDirection;
+        [SerializeField,HideInInspector]
         private float animatorValue = 0;
 
         // Start is called before the first frame update
         void Start()
         {
-            animationDirection = false;
+            
         }
 
         public void StartAnimation()
@@ -35,11 +37,16 @@ namespace MysticVoice
         {
             if (!animationRunning) return;
             UpdateAnimatorValue();
-            float remap1 = Mathf.Clamp01(animatorValue.Remap(0f,0.5f,0,1f));
-            float remap2 = Mathf.Clamp01(animatorValue.Remap(0.5f,1f,0,1f));
+            UpdatePosition();
+        }
+
+        private void UpdatePosition()
+        {
+            float remap1 = Mathf.Clamp01(animatorValue.Remap(0f, 0.5f, 0, 1f));
+            float remap2 = Mathf.Clamp01(animatorValue.Remap(0.5f, 1f, 0, 1f));
             center.transform.localRotation = Quaternion.Euler(0, 0, remap1 * rotationAmmount);
-            left.transform.localPosition = -Vector3.right * displacementAmmount*remap2;
-            right.transform.localPosition = Vector3.right * displacementAmmount*remap2;
+            left.transform.localPosition = -Vector3.right * displacementAmmount * remap2;
+            right.transform.localPosition = Vector3.right * displacementAmmount * remap2;
         }
 
         private void UpdateAnimatorValue()
@@ -53,6 +60,15 @@ namespace MysticVoice
             if(animatorValue <= 0) animatorValue = 0;
             animationRunning = false;
             //animationDirection = !animationDirection;
+        }
+
+        [ContextMenu("ToggleOpenByDefault")]
+        private void ToggleOpenByDefault()
+        {
+            animationDirection = !animationDirection;
+            if (animationDirection) animatorValue = 1;
+            else animatorValue = 0;
+            UpdatePosition();
         }
     }
 }

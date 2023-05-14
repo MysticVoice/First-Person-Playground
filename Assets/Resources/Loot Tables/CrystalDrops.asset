@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootTable:
   - item: {fileID: 11400000, guid: 884495e5fb0fec34495b1790a822093f, type: 2}
-    ammountMin: 1
-    ammountMax: 1
+    ammountMin: 100
+    ammountMax: 1000
     weight: 1
