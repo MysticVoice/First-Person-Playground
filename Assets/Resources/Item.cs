@@ -12,6 +12,19 @@ namespace MysticVoice
     public class Item : ScriptableObject
     {
         [SerializeField]
+        public int itemId;
+        public string itemName;
         public Sprite resource_image;
+        public int maxStack;
+        
+        private StyleBackground itemImage;
+        public StyleBackground ItemImage
+        {
+            get
+            {
+                if(itemImage == null) itemImage = new StyleBackground(resource_image);
+                return itemImage;
+            }
+        }
     }
 }

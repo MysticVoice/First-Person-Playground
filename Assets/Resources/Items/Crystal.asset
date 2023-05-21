@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c0db1f6b0091a448867be3e9233d37, type: 3}
   m_Name: Crystal
   m_EditorClassIdentifier: 
+  itemId: 0
+  itemName: Crystal
   resource_image: {fileID: 21300000, guid: fb08ed9b4a983974eb39b07c13bbbe2f, type: 3}
+  maxStack: 100

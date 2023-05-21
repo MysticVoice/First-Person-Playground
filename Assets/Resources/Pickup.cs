@@ -22,7 +22,13 @@ namespace MysticVoice
             Inventory.MergeInventory(inventoryHolder.GetInventory(),inventory);
 
             // Destroy the pickup object
-            Destroy(gameObject);
+            if (inventory.IsEmpty())
+            {
+                Destroy(inventory);
+                Destroy(gameObject);
+            }
+            
+            
         }
     }
 }

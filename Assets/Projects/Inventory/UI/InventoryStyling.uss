@@ -1,0 +1,16 @@
+.Inventory {
+    flex-direction: row;
+    width: 500px;
+    height: auto;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+    margin-top: 200px;
+    background-color: rgba(0.5,0.5,0.5,0.5);
+}
+
+.Button {
+    width: 45px;
+    height: 45px;
+    margin: 2px;
+}

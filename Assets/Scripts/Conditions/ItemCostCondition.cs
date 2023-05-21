@@ -18,7 +18,7 @@ namespace MysticVoice
         public bool CheckCondition(Transform caller)
         {
             Inventory i = caller.GetComponent<InventoryHolder>().GetInventory();
-            if (i.GetItemAmmount(item) < ammount)
+            if (i.GetQuantity(item) < ammount)
             {
                 return false;
             }

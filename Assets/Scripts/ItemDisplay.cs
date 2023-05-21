@@ -21,7 +21,7 @@ namespace MysticVoice
 
         private void Update()
         {
-            text.text = inventory.GetItemAmmount(item).ToString();
+            text.text = inventory.GetQuantity(item).ToString();
         }
     }
 }

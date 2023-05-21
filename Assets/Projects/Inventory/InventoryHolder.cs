@@ -9,6 +9,16 @@ namespace MysticVoice
         [SerializeField]
         private Inventory inventory;
 
+        public Inventory Inventory { 
+            get {
+                if (inventory == null) inventory = ScriptableObject.CreateInstance<Inventory>();
+                return inventory; 
+            } 
+        }
+
+        [SerializeField]
+        private bool playerInventory;
+
         private void Start()
         {
             //InitializeInventory();
@@ -16,8 +26,7 @@ namespace MysticVoice
 
         public Inventory GetInventory()
         {
-            if(inventory==null) inventory = ScriptableObject.CreateInstance<Inventory>();
-            return inventory;
+            return Inventory;
         }
         public void SetInventory(Inventory inventory)
         {
@@ -36,7 +45,7 @@ namespace MysticVoice
 
         public void SaveData(ref GameData data)
         {
-            data.inventory = GetInventory();
+            data.inventory = Inventory;
         }
     }
 }

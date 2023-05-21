@@ -29,7 +29,7 @@ namespace MysticVoice
             
             GameObject player = InteractionSystem.Player;
             Inventory playerInventory = player.GetComponent<InventoryHolder>().GetInventory();
-            if (playerInventory.GetItemAmmount(costItem) < costAmmount) return;
+            if (playerInventory.GetQuantity(costItem) < costAmmount) return;
             used = true;
             purchaseEvent?.Invoke();
             playerInventory.RemoveItem(costItem,costAmmount);
